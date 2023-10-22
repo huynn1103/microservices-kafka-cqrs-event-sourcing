@@ -9,10 +9,7 @@ namespace Post.Cmd.Domain.Aggregates
         private string _author;
         private readonly Dictionary<Guid, Tuple<string, string>> _comments = new();
 
-        public bool Active
-        {
-            get => _active; set => _active = value;
-        }
+        public bool Active { get => _active; set => _active = value; }
 
         public PostAggregate()
         {
@@ -46,12 +43,12 @@ namespace Post.Cmd.Domain.Aggregates
 
             if (string.IsNullOrWhiteSpace(message))
             {
-                throw new InvalidOperationException($"The value of {nameof(message)} cannot be null of emplty. Please provide a valid {nameof(message)}");
+                throw new InvalidOperationException($"The value of {nameof(message)} cannot be null or empty. Please provide a valid {nameof(message)}");
             }
 
             RaiseEvent(new MessageUpdatedEvent
             {
-                Id = Id,
+                Id = _id,
                 Message = message
             });
         }
@@ -88,7 +85,7 @@ namespace Post.Cmd.Domain.Aggregates
 
             if (string.IsNullOrWhiteSpace(comment))
             {
-                throw new InvalidOperationException($"The value of {nameof(comment)} cannot be null of emplty. Please provide a valid {nameof(comment)}");
+                throw new InvalidOperationException($"The value of {nameof(comment)} cannot be null or empty. Please provide a valid {nameof(comment)}");
             }
 
             RaiseEvent(new CommentAddedEvent
