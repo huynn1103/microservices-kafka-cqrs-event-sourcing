@@ -22,7 +22,7 @@ namespace Post.Cmd.Infrastructure.Handlers
                 return aggregate;
 
             aggregate.ReplayEvents(events);
-            var latestVersion = events.Select(x => x.Version).Max();
+            aggregate.Version = events.Select(x => x.Version).Max();
 
             return aggregate;
         }
